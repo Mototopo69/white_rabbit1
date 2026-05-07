@@ -3,8 +3,11 @@ export default async function handler(req, res) {
 
   const { nome, email, telefono } = req.body;
 
+  // LA TUA EMAIL PER I TEST
+  const TUA_EMAIL_TEST = "sampognaro.matteo@iisgalvanimi.edu.it"; 
+
   try {
-    // 1. Invio Mail all'UTENTE (con l'indovinello)
+    // 1. Mail all'UTENTE (quello che si registra nel form)
     await fetch("https://api.brevo.com/v3/smtp/email", {
       method: "POST",
       headers: {
@@ -12,14 +15,14 @@ export default async function handler(req, res) {
         "content-type": "application/json"
       },
       body: JSON.stringify({
-        sender: { name: "White Rabbit", email: "info@anticabottega.it" }, // Cambia con la mail verificata del cliente
+        sender: { name: "White Rabbit Test", email: TUA_EMAIL_TEST }, 
         to: [{ email: email, name: nome }],
-        subject: "Benvenuto nel White Rabbit - L'Indovinello",
-        htmlContent: `<h1>Ciao ${nome},</h1><p>Hai richiesto l'accesso al White Rabbit.</p><p>Per entrare, devi risolvere questo indovinello: <b>Cosa ha le lancette ma non le mani?</b></p><p>Inserisci la risposta sul sito per sbloccare la porta.</p>`
+        subject: "Benvenuto nel White Rabbit - Risolvi l'Indovinello",
+        htmlContent: `<h3>Ciao ${nome},</h3><p>Per entrare nel club segreto, rispondi: <b>Cosa ha le lancette ma non le mani?</b></p>`
       })
     });
 
-    // 2. Invio Mail al PROPRIETARIO (con i dati dell'utente)
+    // 2. Mail a TE (che fai finta di essere il cliente)
     await fetch("https://api.brevo.com/v3/smtp/email", {
       method: "POST",
       headers: {
@@ -27,15 +30,15 @@ export default async function handler(req, res) {
         "content-type": "application/json"
       },
       body: JSON.stringify({
-        sender: { name: "Sistema Sito", email: "info@anticabottega.it" },
-        to: [{ email: "info@anticabottega.it" }], // La mail del tuo cliente
-        subject: "Nuovo Contatto White Rabbit",
-        htmlContent: `<h3>Nuovo utente registrato:</h3><ul><li><b>Nome:</b> ${nome}</li><li><b>Email:</b> ${email}</li><li><b>Telefono:</b> ${telefono || 'Non fornito'}</li></ul>`
+        sender: { name: "Sistema White Rabbit", email: TUA_EMAIL_TEST },
+        to: [{ email: TUA_EMAIL_TEST }], 
+        subject: "Nuovo Contatto Ricevuto!",
+        htmlContent: `<h3>Nuovo contatto:</h3><ul><li>Nome: ${nome}</li><li>Email: ${email}</li><li>Tel: ${telefono || 'N/A'}</li></ul>`
       })
     });
 
     res.status(200).json({ success: true });
   } catch (err) {
-    res.status(500).json({ error: "Errore invio mail" });
+    res.status(500).json({ error: "Errore invio" });
   }
 }
