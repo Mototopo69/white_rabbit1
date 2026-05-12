@@ -95,7 +95,7 @@ export default function AnticaBottega({ onNavigate }: { onNavigate: () => void }
         </div>
       </section>
 
-      {/* 3. SEZIONE PEZZI SELEZIONATI (CON IMMAGINI AGGIUNTE) */}
+      {/* 3. SEZIONE PEZZI SELEZIONATI */}
       <section className="py-32 px-8 bg-[#0f0f0f]">
         <div className="max-w-6xl mx-auto">
           <h3 className="text-4xl text-center mb-24 tracking-[0.2em] text-[#d4af37] font-light uppercase">
@@ -108,24 +108,23 @@ export default function AnticaBottega({ onNavigate }: { onNavigate: () => void }
                 name: "Macchina da Scrivere", 
                 year: "1920", 
                 price: "€ 1.200", 
-                image: "https://images.unsplash.com/photo-1583337130417-3346a1be7dee?q=80&w=800" 
+                image: "/macchina da scrivere.jpg" 
               },
               { 
                 name: "Orologio da Tasca", 
                 year: "1895", 
                 price: "€ 3.800", 
-                image: "https://images.unsplash.com/photo-1509048191080-d2984bad6ae5?q=80&w=800" 
+                image: "/orologio da tasca.webp" 
               },
               { 
                 name: "Grammofono", 
                 year: "1910", 
                 price: "€ 2.400", 
-                image: "https://images.unsplash.com/photo-1548625361-9f9fa982a55d?q=80&w=800" 
+                image: "/grammofono.jpg" 
               }
             ].map((item, idx) => (
               <div key={idx} className="text-center group cursor-pointer">
                 <div className="mb-10 relative aspect-[4/5] bg-[#1a1a1a] border border-[#d4af37]/10 overflow-hidden transition-all duration-700 group-hover:border-[#d4af37]/50">
-                  {/* Immagine con effetto bianco/nero che si colora al passaggio del mouse */}
                   <img 
                     src={item.image} 
                     alt={item.name} 
@@ -141,7 +140,7 @@ export default function AnticaBottega({ onNavigate }: { onNavigate: () => void }
         </div>
       </section>
 
-      {/* 4. INFO SECTION (A TRE COLONNE) */}
+      {/* 4. INFO SECTION */}
       <section className="py-24 px-8 bg-[#1a1a1a] border-t border-[#d4af37]/10">
         <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-20 text-center">
           <div>
