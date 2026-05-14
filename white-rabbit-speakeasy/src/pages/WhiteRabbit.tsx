@@ -58,14 +58,14 @@ export default function WhiteRabbit({ onBack }: { onBack: () => void }) {
     }
 
     try {
-      // 1. EMAIL DI BENVENUTO PER L'UTENTE (Data aggiornata a 1925)
+      // 1. EMAIL DI BENVENUTO PER L'UTENTE
       const resUtente = await fetch("https://api.brevo.com/v3/smtp/email", {
         method: "POST",
         headers: { "api-key": apiKey, "content-type": "application/json" },
         body: JSON.stringify({
-          sender: { name: "White Rabbit Speakeasy", email: EMAIL_MITTENTE },
+          sender: { name: "White Rabbit Speakeasy 🐰", email: EMAIL_MITTENTE },
           to: [{ email: formData.email, name: formData.nome }],
-          subject: "Benvenuto da White Rabbit",
+          subject: "Benvenuto da White Rabbit 🐰",
           htmlContent: `
             <div style="background-color: #0a0a0a; padding: 40px 20px; font-family: 'Georgia', serif;">
               <div style="max-width: 600px; margin: 0 auto; background-color: #111111; border: 1px solid #d4af37; padding: 40px; text-align: center;">
@@ -73,11 +73,11 @@ export default function WhiteRabbit({ onBack }: { onBack: () => void }) {
                 <div style="width: 40px; height: 1px; background-color: #d4af37; margin: 0 auto 30px auto;"></div>
                 <div style="color: #cccccc; font-size: 15px; line-height: 1.8; text-align: left;">
                   <p>È un piacere per noi darti il benvenuto,<br>
-                  siamo il <strong style="color: #d4af37;">White Rabbit</strong>, lieti di conoscerti &gt;=</p>
+                  siamo il <strong style="color: #d4af37;">White Rabbit</strong>, lieti di conoscerti 🐰</p>
                   <p>Se sei alla ricerca di un'esperienza fuori dall'ordinario, un vero Speakeasy nascosto nel cuore di Milano, sei nel posto giusto. Qui ogni cocktail è un serio impegno da portare a termine come fosse un'opera d’arte.</p>
                   <p>Per varcare la soglia del nostro rifugio segreto, dovrai però dimostrare di possedere la giusta intuizione. Torna alla porta da cui sei arrivato e risolvi l'enigma che ti abbiamo lasciato.</p>
                   <p>Solo chi possiede la chiave corretta potrà conoscere i nostri segreti.</p>
-                  <p style="margin-top: 30px;">Ti aspettiamo dall'altra parte &gt;=</p>
+                  <p style="margin-top: 30px;">Ti aspettiamo dall'altra parte 🐰</p>
                 </div>
                 <div style="margin-top: 40px; padding-top: 20px; border-top: 1px solid #333; color: #666; font-size: 10px; text-transform: uppercase; letter-spacing: 2px;">
                   © 1925 White Rabbit Milano · Confidential
@@ -93,7 +93,7 @@ export default function WhiteRabbit({ onBack }: { onBack: () => void }) {
         method: "POST",
         headers: { "api-key": apiKey, "content-type": "application/json" },
         body: JSON.stringify({
-          sender: { name: "SISTEMA WHITE RABBIT", email: EMAIL_MITTENTE },
+          sender: { name: "SISTEMA WHITE RABBIT 🐰", email: EMAIL_MITTENTE },
           to: [{ email: EMAIL_NOTIFICHE }],
           subject: `NUOVO CONTATTO: ${formData.nome}`,
           htmlContent: `
@@ -151,6 +151,7 @@ export default function WhiteRabbit({ onBack }: { onBack: () => void }) {
       <div className="relative z-10 w-full max-w-xl backdrop-blur-3xl rounded-sm p-12 border border-[#d4af37]/10 bg-black/60 shadow-[0_0_100px_rgba(0,0,0,1)]">
         <div className="text-center mb-16">
            <h1 className="text-5xl tracking-[0.5em] text-white font-extralight uppercase mix-blend-difference">White Rabbit</h1>
+           <p className="text-[#d4af37] tracking-[0.4em] uppercase text-[10px] mt-2 opacity-60">MILANO</p>
            <div className="w-12 h-[1px] bg-[#d4af37] mx-auto mt-6 opacity-50" />
         </div>
         
@@ -174,7 +175,12 @@ export default function WhiteRabbit({ onBack }: { onBack: () => void }) {
             <div className="space-y-6">
               <span className="text-[#d4af37] text-4xl block opacity-30">“</span>
               <p className="text-gray-200 text-lg md:text-xl leading-relaxed italic font-light tracking-wide px-4 font-serif">
-                {configMese.indovinello}
+                {configMese.indovinello.split('//').map((line, index, array) => (
+                  <span key={index}>
+                    {line.trim()}
+                    {index !== array.length - 1 && <><br /><br /></>}
+                  </span>
+                ))}
               </p>
               <span className="text-[#d4af37] text-4xl block opacity-30">”</span>
             </div>
@@ -195,7 +201,6 @@ export default function WhiteRabbit({ onBack }: { onBack: () => void }) {
           </form>
         )}
 
-        {/* Footer aggiornato a 1925 */}
         <div className="mt-16 flex items-center justify-center gap-4 opacity-20">
           <div className="h-[1px] w-8 bg-[#d4af37]" />
           <p className="text-[9px] tracking-[0.5em] text-[#d4af37] uppercase">Est. 1925 Milano</p>
